@@ -1,0 +1,35 @@
+sudo apt update
+sudo apt install vsftpd
+sudo systemctl restart vsftpd
+
+# Устанавливаем Git (если не стоит)
+sudo apt update && sudo apt install git -y  
+
+# Переходим в директорию, где хотим хранить код
+cd /var/www  
+
+# Клонируем репозиторий
+git clone https://github.com/username/repo.git  
+
+# Заходим в папку проекта
+cd repo
+
+
+sudo apt install vsftpd -y
+sudo nano /etc/vsftpd.conf
+
+Включаем:
+
+write_enable=YES (чтобы можно было загружать файлы)
+
+local_umask=022 (права доступа)
+
+Убедитесь, что домашняя папка FTP-пользователя указывает на /var/www/repo
+
+sudo systemctl restart vsftpd
+
+Post-pull hook (автоматизация после обновления)
+
+Git позволяет запускать хуки (скрипты), которые выполняются после команд, например git pull.
+
+Открываем папку хуков:
